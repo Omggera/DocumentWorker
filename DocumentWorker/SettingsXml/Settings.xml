@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Settings>
+	<City CityName="Владимир">
+		<LegalEntity>ИП Кочуев Р.И.</LegalEntity>
+		<LegalName>TechPort.Vladimir</LegalName>
+		<PhoneNumberSalesDepartment>8 (800) 555-87-78</PhoneNumberSalesDepartment>
+		<PhoneNumberDeliveryService>8 (4922) 46-20-57</PhoneNumberDeliveryService>
+		<SellersRepresentative>Кочуев Р.И.</SellersRepresentative>
+	</City>
+	<City CityName="Иваново">
+		<LegalEntity>ИП Кочуев Р.И.</LegalEntity>
+		<LegalName>TechPort.Ivanovo</LegalName>
+		<PhoneNumberSalesDepartment>8 (800) 555-87-78</PhoneNumberSalesDepartment>
+		<PhoneNumberDeliveryService>8 (901) 285-32-32</PhoneNumberDeliveryService>
+		<SellersRepresentative>Кочуев Р.И.</SellersRepresentative>
+	</City>
+	<City CityName="Муром">
+		<LegalEntity>ИП Кочуев Р.И.</LegalEntity>
+		<LegalName>TechPort.Murom</LegalName>
+		<PhoneNumberSalesDepartment>8 (800) 555-87-78</PhoneNumberSalesDepartment>
+		<PhoneNumberDeliveryService>8 (903) 833-55-15</PhoneNumberDeliveryService>
+		<SellersRepresentative>Кочуев Р.И.</SellersRepresentative>
+	</City>
+	<City CityName="Ковров">
+		<LegalEntity>ИП Кочуев Р.И.</LegalEntity>
+		<LegalName>TechPort.Kovrov</LegalName>
+		<PhoneNumberSalesDepartment>8 (800) 555-87-78</PhoneNumberSalesDepartment>
+		<PhoneNumberDeliveryService>8 (920) 949-04-30</PhoneNumberDeliveryService>
+		<SellersRepresentative>Кочуев Р.И.</SellersRepresentative>
+	</City>
+</Settings>
