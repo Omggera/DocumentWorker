@@ -54,6 +54,9 @@ namespace DocumentWorker.ViewModels
         [ObservableProperty]
         private string? _sellersRepresentative;
 
+        [ObservableProperty]
+        private int _progressBarValue = 0;
+
         private readonly IGetCityListFromXml _getCityListFromXml;
         private readonly IGetXmlData _getXmlData;
 
@@ -86,15 +89,21 @@ namespace DocumentWorker.ViewModels
             if((SaveFolderPath != null) & (SaveFolderPath != string.Empty)) 
             {
                 SaveFolderPath = SaveFolderPath;
-                excelCreater.Excel(
-                    SaveFolderPath, 
-                    Fileslist,
+                foreach(var file in Fileslist)
+                {
+                    excelCreater.Excel(
+                    SaveFolderPath,
+                    file,
                     CitySet,
                     LegalEntity,
-                    LegalName, 
+                    LegalName,
                     PhoneNumberSalesDepartment,
                     PhoneNumberDeliveryService,
                     SellersRepresentative);
+
+                    ProgressBarValue += 100/Fileslist.Count;
+                }
+                
             }
             else SaveFolderPath = "Выберите папку для сохранения";
         }
