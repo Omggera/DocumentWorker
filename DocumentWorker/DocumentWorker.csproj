@@ -33,7 +33,9 @@
   <ItemGroup>
     <Resource Include="Assets\applicationIcon-1024.png" />
     <Resource Include="Assets\applicationIcon-256.png" />
-    <Resource Include="SettingsXml\Settings.xml" />
+    <None Include="SettingsXml\Settings.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Resource Include="TemplateXlsxFile\Base.xlsx" />
   </ItemGroup>
 

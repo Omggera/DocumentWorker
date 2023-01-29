@@ -54,9 +54,14 @@ namespace DocumentWorker
                 services.AddScoped<ViewModels.DataViewModel>();
                 services.AddScoped<Views.Pages.SettingsPage>();
                 services.AddScoped<ViewModels.SettingsViewModel>();
+                services.AddScoped<Views.Pages.CitySettingsPage>();
+                services.AddScoped<ViewModels.CitySettingsViewModel>();
 
                 services.AddSingleton<IGetCityListFromXml, GetCityListFromXml>();
                 services.AddSingleton<IGetXmlData, GetXmlData>();
+                services.AddSingleton<ISaveSettingsXml, SaveSettingsXml>();
+                services.AddSingleton<IGetXDocument, GetXDocument>();
+                
 
                 // Configuration
                 services.Configure<AppConfig>(context.Configuration.GetSection(nameof(AppConfig)));

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Resources;
 using System.Xml;
 using System.Xml.Linq;
 using DocumentWorker.Interfaces;
@@ -12,22 +14,24 @@ namespace DocumentWorker.Models
 {
     public class GetCityListFromXml : IGetCityListFromXml
     {
+        IGetXDocument _getXDocument;
+        public GetCityListFromXml(IGetXDocument getXDocument)
+        {
+            _getXDocument = getXDocument;
+        }
         public List<string>? CityList { get; set; }
         public List<string> GetCityList()
         {
-            var uri = new Uri("pack://application:,,,/SettingsXml/Settings.xml");
-            var resourceStream = Application.GetResourceStream(uri).Stream;
-
-            XmlDocument doc = new XmlDocument();
-            doc.Load(resourceStream);
+            var xDoc = _getXDocument.GetDoc();
 
             CityList = new List<string>();
-            XmlElement? root = doc.DocumentElement;
-            XmlNodeList? items = root?.SelectNodes("City");
-            if (items is not null)
+            var roots = xDoc.Element("Settings")?.
+                Elements("City").Select(p => p.Attribute("CityName")?.Value);
+
+            if (roots is not null)
             {
-                foreach (XmlNode item in items)
-                    CityList?.Add(item.SelectSingleNode("@CityName")?.Value);
+                foreach (var root in roots)
+                    CityList?.Add(root);
 
                 return CityList;
             }

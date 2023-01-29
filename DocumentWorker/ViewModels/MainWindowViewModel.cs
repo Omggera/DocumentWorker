@@ -39,16 +39,24 @@ namespace DocumentWorker.ViewModels
                 new NavigationItem()
                 {
                     Content = "Заказы",
-                    PageTag = "dashboard",
-                    Icon = SymbolRegular.Home24,
+                    PageTag = "orders",
+                    Icon = SymbolRegular.DocumentMultiple24,
                     PageType = typeof(Views.Pages.DashboardPage)
                 },
                 new NavigationItem()
                 {
                     Content = "Прайс",
-                    PageTag = "data",
-                    Icon = SymbolRegular.DataHistogram24,
+                    PageTag = "price",
+                    Icon = SymbolRegular.DocumentData24,
                     PageType = typeof(Views.Pages.DataPage)
+                }
+                ,
+                new NavigationItem()
+                {
+                    Content = "Города",
+                    PageTag = "citysettings",
+                    Icon = SymbolRegular.AddCircle24,
+                    PageType = typeof(Views.Pages.CitySettingsPage)
                 }
             };
 

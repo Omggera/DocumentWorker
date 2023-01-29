@@ -17,6 +17,13 @@ using System.Text;
 using System.Data.SqlTypes;
 using System.Xml.Linq;
 using DocumentWorker.Interfaces;
+using System.Threading.Tasks;
+using static OfficeOpenXml.ExcelErrorValue;
+using Wpf.Ui.Controls;
+using System.Windows.Controls;
+using DocumentWorker.Services;
+using DocumentWorker.Views.Pages;
+using Wpf.Ui.Controls.Interfaces;
 
 namespace DocumentWorker.ViewModels
 {
@@ -33,7 +40,7 @@ namespace DocumentWorker.ViewModels
 
         //Выбранный в ComboBox город
         [ObservableProperty]
-        private string? _citySet = "Владимир";
+        private string? _citySet;
 
         //Список всех городов
         [ObservableProperty]
@@ -57,21 +64,31 @@ namespace DocumentWorker.ViewModels
         [ObservableProperty]
         private int _progressBarValue = 0;
 
+        [ObservableProperty]
+        private string _labelProgressBar;
+
+        [ObservableProperty]
+        private string _permissionToEdit = "True";
+
+
+        [ObservableProperty]
+        private string _someDialog;
+
+
         private readonly IGetCityListFromXml _getCityListFromXml;
         private readonly IGetXmlData _getXmlData;
+        private ISaveSettingsXml _saveSettingsXml;
 
-        public DashboardViewModel(IGetCityListFromXml getCityListFromXml, IGetXmlData getXmlData)
+        public DashboardViewModel(
+            IGetCityListFromXml getCityListFromXml, 
+            IGetXmlData getXmlData,
+            ISaveSettingsXml saveSettingsXml)
         {
             _getCityListFromXml = getCityListFromXml;
             _getXmlData = getXmlData;
 
             CityList = _getCityListFromXml.GetCityList();
-
-            LegalEntity = _getXmlData.GetData(CitySet).LegalEntity;
-            LegalName = _getXmlData.GetData(CitySet).LegalName;
-            PhoneNumberSalesDepartment = _getXmlData.GetData(CitySet).PhoneNumberSalesDepartment;
-            PhoneNumberDeliveryService = _getXmlData.GetData(CitySet).PhoneNumberDeliveryService;
-            SellersRepresentative = _getXmlData.GetData(CitySet).SellersRepresentative;
+            _saveSettingsXml = saveSettingsXml;
         }
 
         public void OnNavigatedTo()
@@ -83,27 +100,30 @@ namespace DocumentWorker.ViewModels
         }
 
         [RelayCommand]
-        private void Start()
+        private async void Start()
         {
             ExcelCreater excelCreater = new();
             if((SaveFolderPath != null) & (SaveFolderPath != string.Empty)) 
             {
                 SaveFolderPath = SaveFolderPath;
-                foreach(var file in Fileslist)
+
+                var progress = new Progress<int>(value =>
                 {
-                    excelCreater.Excel(
+                    ProgressBarValue = value;
+                    LabelProgressBar = $"{value}%";
+                });
+
+                await Task.Run( () => excelCreater.Excel(
                     SaveFolderPath,
-                    file,
+                    Fileslist,
                     CitySet,
                     LegalEntity,
                     LegalName,
                     PhoneNumberSalesDepartment,
                     PhoneNumberDeliveryService,
-                    SellersRepresentative);
+                    SellersRepresentative,
+                    progress));
 
-                    ProgressBarValue += 100/Fileslist.Count;
-                }
-                
             }
             else SaveFolderPath = "Выберите папку для сохранения";
         }
@@ -112,6 +132,8 @@ namespace DocumentWorker.ViewModels
         private void OpenFile()
         {
             SelectExcelFiles.AddExcelFilesToList(Fileslist);
+            ProgressBarValue = 0;
+            LabelProgressBar = " ";
         }
 
         [RelayCommand]
@@ -124,6 +146,8 @@ namespace DocumentWorker.ViewModels
         private void DeleteAllFilesFromList()
         {
             Fileslist.Clear();
+            ProgressBarValue = 0;
+            LabelProgressBar = " ";
         }
 
         [RelayCommand]
@@ -147,5 +171,33 @@ namespace DocumentWorker.ViewModels
             PhoneNumberDeliveryService = _getXmlData.GetData(CitySet).PhoneNumberDeliveryService;
             SellersRepresentative = _getXmlData.GetData(CitySet).SellersRepresentative;
         }
+
+        [RelayCommand]
+        private void Edit()
+        {
+            PermissionToEdit = "False";
+        }
+
+        [RelayCommand]
+        private void Save()
+        {
+            _saveSettingsXml.SaveSettings(
+                CitySet,
+                LegalEntity,
+                LegalName,
+                PhoneNumberSalesDepartment,
+                PhoneNumberDeliveryService,
+                SellersRepresentative);
+
+            PermissionToEdit = "True";
+        }
+
+        [RelayCommand]
+        private void AddNewCity()
+        {
+            
+            
+        }
+
     }
 }

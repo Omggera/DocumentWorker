@@ -13,16 +13,16 @@ namespace DocumentWorker.Models
 {
     public class GetXmlData : IGetXmlData
     {
+        IGetXDocument _getXDocument;
+        public GetXmlData(IGetXDocument getXDocument)
+        {
+            _getXDocument = getXDocument;
+        }
+
         public City? City { get; set; }
         public City GetData(string citySet)
         {
-
-            var uri = new Uri("pack://application:,,,/SettingsXml/Settings.xml");
-            var resourceStream = Application.GetResourceStream(uri).Stream;
-
-            XDocument xdoc = XDocument.Load(resourceStream);
-
-            var data = xdoc.Element("Settings")?
+            var data = _getXDocument.GetDoc().Element("Settings")?
                 .Elements("City")
                 .FirstOrDefault(p => p.Attribute("CityName")?.Value == $"{citySet}");
 

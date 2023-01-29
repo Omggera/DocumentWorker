@@ -37,7 +37,7 @@
             Text="{Binding ViewModel.SaveFolderPath, Mode=TwoWay}"/>
         <ui:Button 
             Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" 
-            Icon="Fluent48" Margin="310,20,10,0" Height="35"
+            Icon="ArrowDownload20" Margin="310,20,10,0" Height="36" FontSize="20"
             Command="{Binding ViewModel.SaveFolderCommand}"/>
 
         <TextBlock  
@@ -48,7 +48,6 @@
             Grid.Column="1" Grid.Row="0"
             Margin="10,32,10,0" Height="36" Width="160"
             VerticalAlignment="Top"
-            SelectedIndex="0"
             SelectedItem="{Binding ViewModel.CitySet, Mode=TwoWay}"
             ItemsSource="{Binding ViewModel.CityList}">
             <i:Interaction.Triggers>
@@ -94,12 +93,32 @@
             Command="{Binding ViewModel.DeleteAllFilesFromListCommand}"/>
 
         <ProgressBar
-            Grid.Row="2" Grid.Column="0"
+            Grid.Row="2" Grid.Column="0" Minimum="0" Maximum="100"
             Margin="10" Value="{Binding ViewModel.ProgressBarValue}"/>
 
         <Label
             Grid.Row="2" Grid.Column="1" Margin="10"
-            Content="{Binding ViewModel.CitySet, Mode=OneWay}"/>
+            Content="{Binding ViewModel.LabelProgressBar, Mode=OneWay}"/>
+
+        <TextBlock  
+            Grid.Column="2" Grid.Row="0" Margin="10,5,0,0" 
+            VerticalAlignment="Top" 
+            Text="Настройки документа" FontSize="14" />
+
+        <ui:Button 
+            x:Name="AddCity"
+            Grid.Column="2" Grid.Row="0" Height="36"
+            Icon="AddCircle20" Margin="10,30,10,10" FontSize="20"/>
+
+        <ui:Button 
+            Grid.Column="2" Grid.Row="0" Height="36"
+            Icon="Edit20" Margin="138,30,10,10" FontSize="20"
+            Command="{Binding ViewModel.EditCommand}"/>
+
+        <ui:Button 
+            Grid.Column="2" Grid.Row="0" Height="36"
+            Icon="Save20" Margin="197,32,0,0" FontSize="20" VerticalAlignment="Top"
+            Command="{Binding ViewModel.SaveCommand}"/>
 
         <TextBlock  
             Grid.Column="2" Grid.Row="1" Margin="10,10,0,0" 
@@ -107,7 +126,7 @@
             Text="Юридическое лицо" />
         <TextBox 
             Grid.Column="2" Grid.Row="1" Margin="10,32,10,10"  
-            TextWrapping="NoWrap" VerticalAlignment="Top" IsReadOnly="True"
+            TextWrapping="NoWrap" VerticalAlignment="Top" IsReadOnly="{Binding ViewModel.PermissionToEdit}"
             Width="230" Text="{Binding ViewModel.LegalEntity}"/>
 
         <TextBlock  
@@ -116,7 +135,7 @@
             Text="Название юр.лица" />
         <TextBox 
             Grid.Column="2" Grid.Row="1" Margin="10,102,10,10"  
-            TextWrapping="NoWrap" VerticalAlignment="Top" IsReadOnly="True"
+            TextWrapping="NoWrap" VerticalAlignment="Top" IsReadOnly="{Binding ViewModel.PermissionToEdit}"
             Width="230" Text="{Binding ViewModel.LegalName}"/>
 
         <TextBlock  
@@ -125,7 +144,7 @@
             Text="Телефон отдела продаж" />
         <TextBox 
             Grid.Column="2" Grid.Row="1" Margin="10,172,10,10"  
-            TextWrapping="NoWrap" VerticalAlignment="Top" IsReadOnly="True"
+            TextWrapping="NoWrap" VerticalAlignment="Top" IsReadOnly="{Binding ViewModel.PermissionToEdit}"
             Width="230" Text="{Binding ViewModel.PhoneNumberSalesDepartment}"/>
 
         <TextBlock  
@@ -134,7 +153,7 @@
             Text="Телефон службы доставки" />
         <TextBox 
             Grid.Column="2" Grid.Row="1" Margin="10,242,10,10" TextWrapping="NoWrap" 
-            VerticalAlignment="Top" Width="230" IsReadOnly="True" 
+            VerticalAlignment="Top" Width="230" IsReadOnly="{Binding ViewModel.PermissionToEdit}" 
             Text="{Binding ViewModel.PhoneNumberDeliveryService}"/>
 
         <TextBlock  
@@ -142,9 +161,9 @@
             VerticalAlignment="Top" FontSize="14"
             Text="Представитель продавца" />
         <TextBox 
-            Grid.Column="2" Grid.Row="1" Margin="10,312,10,10"  
-            TextWrapping="NoWrap" VerticalAlignment="Top"
-            Width="230" IsReadOnly="True" Text="{Binding ViewModel.SellersRepresentative}"/>
+            Grid.Column="2" Grid.Row="1" Margin="10,312,10,10" Width="230" 
+            TextWrapping="NoWrap" VerticalAlignment="Top" IsReadOnly="{Binding ViewModel.PermissionToEdit}" 
+            Text="{Binding ViewModel.SellersRepresentative}"/>
 
     </Grid>
 </ui:UiPage>

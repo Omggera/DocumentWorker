@@ -1,4 +1,7 @@
-﻿using Wpf.Ui.Common.Interfaces;
+﻿using System;
+using Wpf.Ui.Common.Interfaces;
+using Wpf.Ui.Controls;
+using Wpf.Ui.Controls.Interfaces;
 
 namespace DocumentWorker.Views.Pages
 {
@@ -18,5 +21,6 @@ namespace DocumentWorker.Views.Pages
 
             InitializeComponent();
         }
+
     }
 }

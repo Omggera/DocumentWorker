@@ -29,7 +29,7 @@ namespace DocumentWorker.ViewModels
         private void InitializeViewModel()
         {
             CurrentTheme = Wpf.Ui.Appearance.Theme.GetAppTheme();
-            AppVersion = $"DocumentWorker - {GetAssemblyVersion()}";
+            AppVersion = $"Document Worker - {GetAssemblyVersion()}";
 
             _isInitialized = true;
         }
