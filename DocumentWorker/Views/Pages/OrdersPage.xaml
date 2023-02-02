@@ -36,7 +36,7 @@
             Margin="10,5,0,0" VerticalAlignment="Top" 
             Text="Выберите папку для сохранения" FontSize="14" />
         <ui:TextBox 
-            Grid.Column="0"  Grid.Row="0"
+            Grid.Column="0"  Grid.Row="0" IsReadOnly="True"
             Margin="10,32,60,0" Width="300" Height="36"
             TextWrapping="NoWrap" VerticalAlignment="Top"
             Text="{Binding ViewModel.SaveFolderPath, Mode=TwoWay}"/>
@@ -127,7 +127,7 @@
         <TextBox 
             Grid.Column="2" Grid.Row="1" Margin="10,32,10,10"  
             TextWrapping="NoWrap" VerticalAlignment="Top" IsReadOnly="{Binding ViewModel.PermissionToEdit}"
-            Width="230" Text="{Binding ViewModel.LegalEntity}"/>
+            Width="230" Text="{Binding ViewModel.LegalEntity, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
 
         <TextBlock  
             Grid.Column="2" Grid.Row="1" Margin="10,80,0,0" 
@@ -136,7 +136,7 @@
         <TextBox 
             Grid.Column="2" Grid.Row="1" Margin="10,102,10,10"  
             TextWrapping="NoWrap" VerticalAlignment="Top" IsReadOnly="{Binding ViewModel.PermissionToEdit}"
-            Width="230" Text="{Binding ViewModel.LegalName}"/>
+            Width="230" Text="{Binding ViewModel.LegalName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
 
         <TextBlock  
             Grid.Column="2" Grid.Row="1" Margin="10,150,0,0" 
@@ -145,7 +145,7 @@
         <TextBox 
             Grid.Column="2" Grid.Row="1" Margin="10,172,10,10"  
             TextWrapping="NoWrap" VerticalAlignment="Top" IsReadOnly="{Binding ViewModel.PermissionToEdit}"
-            Width="230" Text="{Binding ViewModel.PhoneNumberSalesDepartment}"/>
+            Width="230" Text="{Binding ViewModel.PhoneNumberSalesDepartment, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
 
         <TextBlock  
             Grid.Column="2" Grid.Row="1" Margin="10,220,0,0" 
@@ -154,7 +154,7 @@
         <TextBox 
             Grid.Column="2" Grid.Row="1" Margin="10,242,10,10" TextWrapping="NoWrap" 
             VerticalAlignment="Top" Width="230" IsReadOnly="{Binding ViewModel.PermissionToEdit}" 
-            Text="{Binding ViewModel.PhoneNumberDeliveryService}"/>
+            Text="{Binding ViewModel.PhoneNumberDeliveryService, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
 
         <TextBlock  
             Grid.Column="2" Grid.Row="1" Margin="10,290,0,0" 
@@ -163,9 +163,7 @@
         <TextBox 
             Grid.Column="2" Grid.Row="1" Margin="10,312,10,10" Width="230" 
             TextWrapping="NoWrap" VerticalAlignment="Top" IsReadOnly="{Binding ViewModel.PermissionToEdit}" 
-            Text="{Binding ViewModel.SellersRepresentative}"/>
-        
-        <ui:Snackbar Title="Title" Appearance="Secondary" />
+            Text="{Binding ViewModel.SellersRepresentative, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
     </Grid>
     
 </ui:UiPage>

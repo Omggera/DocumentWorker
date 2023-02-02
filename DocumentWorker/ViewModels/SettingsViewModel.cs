@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
-using System.Windows.Input;
 using Wpf.Ui.Common.Interfaces;
 
 namespace DocumentWorker.ViewModels
@@ -34,11 +33,19 @@ namespace DocumentWorker.ViewModels
             _isInitialized = true;
         }
 
+        /// <summary>
+        /// Получает версию приложения
+        /// </summary>
+        /// <returns>Строка содержащая версию приложения</returns>
         private string GetAssemblyVersion()
         {
             return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? String.Empty;
         }
 
+        /// <summary>
+        /// Выбирает цветовю тему оформления программы
+        /// </summary>
+        /// <param name="parameter"></param>
         [RelayCommand]
         private void OnChangeTheme(string parameter)
         {

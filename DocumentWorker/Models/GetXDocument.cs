@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Resources;
 using System.Xml.Linq;
 using DocumentWorker.Interfaces;
 
@@ -13,6 +7,10 @@ namespace DocumentWorker.Models
 {
     public class GetXDocument : IGetXDocument
     {
+        /// <summary>
+        /// Реализует класс StreamReader, получает xml документ и закрыает поток
+        /// </summary>
+        /// <returns>XDocument</returns>
         public XDocument GetDoc()
         {
             XDocument xdoc = new XDocument();

@@ -1,23 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace DocumentWorker.Models
 {
     public class City
     {
+        /// <summary> Название города </summary>
         public string CityName { get; set; }
-        //Юридическое лицо
+
+        /// <summary> Юридическое лицо </summary>
         public string LegalEntity { get; set; }
-        //Название юр.лица
+
+        /// <summary> Название организации на латинице </summary>
         public string LegalName { get; set; }
-        //Телефон отдела продаж
+
+        /// <summary> Телефон отдела продаж </summary>//
         public string PhoneNumberSalesDepartment { get; set; }
-        //Телефон службы доставки
+
+        /// <summary> Телефон службы доставки </summary>
         public string PhoneNumberDeliveryService { get; set; }
-        //Представитель Продавца
+
+        /// <summary> Представитель продавца </summary>
         public string SellersRepresentative { get; set; }
 
         public City(

@@ -12,38 +12,45 @@ namespace DocumentWorker.ViewModels
 {
     public partial class PriceViewModel : ObservableObject, INavigationAware
     {
+        /// <summary> Абсолютный путь к файлу прайс-листа </summary>
         [ObservableProperty]
         private string? _filePricePath;
 
+        /// <summary> Абсолютный путь к папке куда сохранится созданный файл </summary>
         [ObservableProperty]
         private string? _saveFolderPath = string.Empty;
 
+        /// <summary> Значение шкалы progress bar </summary>
         [ObservableProperty]
         private int _progressBarValue = 0;
 
+        /// Значение шкалы progress bar для числового отображения в label </summary>
         [ObservableProperty]
         private string? _labelProgressBar;
 
-        public PriceViewModel()
-        {
-
-        }
-
-
+        /// <summary>
+        /// Добавляет xlsx файл прайс-листа
+        /// </summary>
         [RelayCommand]
         private void AddPrice()
         {
-            FilePricePath = SelectFolderOrFile.AddExcelPriceFile();
+            FilePricePath = SelectFolderOrFile.WorkingWithTheFileDialog();
             ProgressBarValue = 0;
             LabelProgressBar = " ";
         }
 
+        /// <summary>
+        /// Выбирает папку для сохранения созданного прайс-листа
+        /// </summary>
         [RelayCommand]
         private void SaveFolder()
         {
             SaveFolderPath = SelectFolderOrFile.SelectFolderToSave();
         }
 
+        /// <summary>
+        /// Запускает набор прайс-листа
+        /// </summary>
         [RelayCommand]
         private async void Start()
         {

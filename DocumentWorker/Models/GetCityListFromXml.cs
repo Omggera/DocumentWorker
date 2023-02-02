@@ -1,14 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Resources;
-using System.Xml;
-using System.Xml.Linq;
 using DocumentWorker.Interfaces;
 
 namespace DocumentWorker.Models
@@ -20,12 +11,15 @@ namespace DocumentWorker.Models
         {
             _getXDocument = getXDocument;
         }
-       // public ObservableCollection<string>? CityListAll { get; set; }
+       
+        /// <summary>
+        /// Получает список всех городов из xml файла
+        /// </summary>
+        /// <param name="CityListAll">Список городов</param>
         public void GetCityList(ObservableCollection<string>? CityListAll)
         {
             var xDoc = _getXDocument.GetDoc();
 
-            //CityListAll = new ObservableCollection<string>();
             var roots = xDoc.Element("Settings")?.
                 Elements("City").Select(p => p.Attribute("CityName")?.Value);
 
@@ -35,9 +29,6 @@ namespace DocumentWorker.Models
                     CityListAll?.Add(root);
 
             }
-
-            //CityListAll.Add("Список пуст");
-
         }
     }
 }

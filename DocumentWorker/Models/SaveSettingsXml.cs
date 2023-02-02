@@ -1,18 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Markup;
-using System.Windows.Resources;
-using System.Windows.Shapes;
-using System.Xml;
-using System.Xml.Linq;
 using DocumentWorker.Interfaces;
-using Microsoft.Win32.SafeHandles;
 
 namespace DocumentWorker.Models
 {
@@ -24,6 +13,16 @@ namespace DocumentWorker.Models
             _getXDocument = getXDocument;
         }
 
+        /// <summary>
+        /// Сохраняет настройки после изменения данных
+        /// выбранного города
+        /// </summary>
+        /// <param name="citySet">Выбранный город</param>
+        /// <param name="legalEntityNew">Юридическое лицо</param>
+        /// <param name="legalNameNew">Название организации на латинице</param>
+        /// <param name="phoneNumberSalesDepartmentNew">Телефон отдела продаж</param>
+        /// <param name="phoneNumberDeliveryServiceNew">Телефон службы доставки</param>
+        /// <param name="SellersRepresentativeNew">Представитель продавца</param>
         public void SaveSettings(
             string citySet, 
             string legalEntityNew,
@@ -36,10 +35,12 @@ namespace DocumentWorker.Models
 
             using (StreamWriter stream = new StreamWriter($"{AppDomain.CurrentDomain.BaseDirectory}Settings\\Settings.xml"))
             {
+                //Получаем данные в xml по названию города
                 var data = xDoc.Element("Settings")?
                     .Elements("City")
                     .FirstOrDefault(p => p.Attribute("CityName")?.Value == $"{citySet}");
 
+                //Если этот город есть, то вносим изменения в xml файл
                 if (data != null)
                 {
                     var legalEntityOld = data.Element("LegalEntity");

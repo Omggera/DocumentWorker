@@ -1,18 +1,18 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DocumentWorker.Models
 {
     public static class SelectFolderOrFile
     {
-        public static void AddExcelOrdersFiles(ObservableCollection<string>? list)
+        /// <summary>
+        /// Открывает файловый диалог с возможностью множественного
+        /// выбора xlsx файлов и заполняет список абсолютными путями 
+        /// к файлам
+        /// </summary>
+        /// <param name="list">Список для заполнения данными</param>
+        public static void WorkingWithTheFileDialog(ObservableCollection<string>? list)
         {
             var dialog = openExcelFileDialog(true, "Excel files (*.xlsx)|*.xlsx");
 
@@ -25,7 +25,12 @@ namespace DocumentWorker.Models
             }
         }
 
-        public static string AddExcelPriceFile()
+        /// <summary>
+        /// Открывает файловый диалог без возможности множественного
+        /// выбора xlsx файлов.
+        /// </summary>
+        /// <returns>строка с абсолютным путем к выбранному файлу</returns>
+        public static string WorkingWithTheFileDialog()
         {
             var dialog = openExcelFileDialog(false, "Excel files (*.xlsx)|*.xlsx");
             
@@ -38,6 +43,10 @@ namespace DocumentWorker.Models
             return "Прайс-лист не выбран";
         }
 
+        /// <summary>
+        /// Открывает диалог для выбора папки.
+        /// </summary>
+        /// <returns>строка с абсолютным путем к выбранной папке</returns>
         public static string SelectFolderToSave()
         {
             FolderBrowserDialog openFileDlg = new();
@@ -54,9 +63,9 @@ namespace DocumentWorker.Models
         /// Открывает файловый диалог.
         /// Пример фильтра "Excel files (*.xlsx)|*.xlsx"
         /// </summary>
-        /// <param name="multiselect"></param>
-        /// <param name="filter"></param>
-        /// <returns></returns>
+        /// <param name="multiselect">Возможность множественного выбора true или false</param>
+        /// <param name="filter">Фильтр файлов, которые можно выбрать</param>
+        /// <returns>OpenFileDialog</returns>
         private static OpenFileDialog openExcelFileDialog(bool multiselect, string filter)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();

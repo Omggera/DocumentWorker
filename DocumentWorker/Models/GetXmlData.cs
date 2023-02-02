@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Xml;
-using System.Xml.Linq;
+﻿using System.Linq;
 using DocumentWorker.Interfaces;
 
 namespace DocumentWorker.Models
@@ -20,6 +12,12 @@ namespace DocumentWorker.Models
         }
 
         public City? City { get; set; }
+
+        /// <summary>
+        /// Поулчает все данные из xml файла по выбранному городу
+        /// </summary>
+        /// <param name="citySet">Выбранный город</param>
+        /// <returns> Класс City</returns>
         public City GetData(string citySet)
         {
             var data = _getXDocument.GetDoc().Element("Settings")?
