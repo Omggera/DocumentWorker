@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -19,26 +20,24 @@ namespace DocumentWorker.Models
         {
             _getXDocument = getXDocument;
         }
-        public List<string>? CityList { get; set; }
-        public List<string> GetCityList()
+       // public ObservableCollection<string>? CityListAll { get; set; }
+        public void GetCityList(ObservableCollection<string>? CityListAll)
         {
             var xDoc = _getXDocument.GetDoc();
 
-            CityList = new List<string>();
+            //CityListAll = new ObservableCollection<string>();
             var roots = xDoc.Element("Settings")?.
                 Elements("City").Select(p => p.Attribute("CityName")?.Value);
 
             if (roots is not null)
             {
                 foreach (var root in roots)
-                    CityList?.Add(root);
+                    CityListAll?.Add(root);
 
-                return CityList;
             }
 
-            CityList.Add("Список пуст");
+            //CityListAll.Add("Список пуст");
 
-            return CityList;
         }
     }
 }

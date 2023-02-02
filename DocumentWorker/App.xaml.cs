@@ -48,10 +48,10 @@ namespace DocumentWorker
                 services.AddScoped<ViewModels.MainWindowViewModel>();
 
                 // Views and ViewModels
-                services.AddScoped<Views.Pages.DashboardPage>();
-                services.AddScoped<ViewModels.DashboardViewModel>();
-                services.AddScoped<Views.Pages.DataPage>();
-                services.AddScoped<ViewModels.DataViewModel>();
+                services.AddScoped<Views.Pages.OrdersPage>();
+                services.AddScoped<ViewModels.OrdersViewModel>();
+                services.AddScoped<Views.Pages.PricePage>();
+                services.AddScoped<ViewModels.PriceViewModel>();
                 services.AddScoped<Views.Pages.SettingsPage>();
                 services.AddScoped<ViewModels.SettingsViewModel>();
                 services.AddScoped<Views.Pages.CitySettingsPage>();
@@ -61,7 +61,8 @@ namespace DocumentWorker
                 services.AddSingleton<IGetXmlData, GetXmlData>();
                 services.AddSingleton<ISaveSettingsXml, SaveSettingsXml>();
                 services.AddSingleton<IGetXDocument, GetXDocument>();
-                
+                services.AddSingleton<IAddNewCity, AddNewCity>();
+                services.AddSingleton<IDeleteCity, DeleteCity>();
 
                 // Configuration
                 services.Configure<AppConfig>(context.Configuration.GetSection(nameof(AppConfig)));

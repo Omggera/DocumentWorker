@@ -34,7 +34,7 @@ namespace DocumentWorker.Models
         {
             var xDoc = _getXDocument.GetDoc();
 
-            using (StreamWriter stream = new StreamWriter($"{AppDomain.CurrentDomain.BaseDirectory}SettingsXml\\Settings.xml"))
+            using (StreamWriter stream = new StreamWriter($"{AppDomain.CurrentDomain.BaseDirectory}Settings\\Settings.xml"))
             {
                 var data = xDoc.Element("Settings")?
                     .Elements("City")

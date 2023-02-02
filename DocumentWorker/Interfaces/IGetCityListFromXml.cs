@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace DocumentWorker.Interfaces
 {
     public interface IGetCityListFromXml
     {
-        List<string>? CityList { get; set; }
+        //ObservableCollection<string>? CityListAll { get; set; }
 
-        List<string> GetCityList();
+        void GetCityList(ObservableCollection<string>? CityListAll);
     }
 }

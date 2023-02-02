@@ -41,14 +41,14 @@ namespace DocumentWorker.ViewModels
                     Content = "Заказы",
                     PageTag = "orders",
                     Icon = SymbolRegular.DocumentMultiple24,
-                    PageType = typeof(Views.Pages.DashboardPage)
+                    PageType = typeof(Views.Pages.OrdersPage)
                 },
                 new NavigationItem()
                 {
                     Content = "Прайс",
                     PageTag = "price",
                     Icon = SymbolRegular.DocumentData24,
-                    PageType = typeof(Views.Pages.DataPage)
+                    PageType = typeof(Views.Pages.PricePage)
                 }
                 ,
                 new NavigationItem()

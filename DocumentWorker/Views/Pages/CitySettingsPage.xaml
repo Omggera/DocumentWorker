@@ -25,7 +25,96 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Label Width="100" Height="100" Grid.Row="1" Grid.Column="1" Content="dfgdfg"></Label>
+
+        <TextBlock
+            FontSize="20"
+            FontWeight="Medium"
+            Text="Добавить город" />
+
+        <ListBox 
+            Grid.Column="0" Grid.Row="3" Height="150" Width="270"
+            HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10"
+            SelectionMode="Single"
+            SelectedItem="{Binding ViewModel.SelectedItem}"
+            ItemsSource="{Binding ViewModel.CityList}"/>
+
+        <TextBlock
+            Grid.Column="0" Grid.Row="2"
+            FontSize="20"
+            FontWeight="Medium"
+            Text="Удалить город" />
+
+        <ui:Button 
+            Grid.Column="1" Grid.Row="3"
+            VerticalAlignment="Top" HorizontalAlignment="Left"
+            Content="Удалить выбранный" 
+            Margin="10,120,10,0" Height="40" Width="160" 
+            Command="{Binding ViewModel.DeleteCityCommand, Mode=OneWay}"
+            />
+
+        <ui:Button 
+            Grid.Column="2" Grid.Row="1"
+            VerticalAlignment="Top" HorizontalAlignment="Center"
+            Content="Добавить"
+            Margin="10,166,0,0" Height="40" Width="160"
+            Command="{Binding ViewModel.AddCityCommand}"/>
+
+        <TextBlock  
+            Grid.Column="0" Grid.Row="1" Margin="10,10,0,0" 
+            VerticalAlignment="Top" FontSize="14"
+            Text="Название города" />
+        <TextBox 
+            Grid.Column="0" Grid.Row="1" Margin="10,32,10,10"  
+            TextWrapping="NoWrap" VerticalAlignment="Top" Width="270"
+            Text="{Binding ViewModel.CityName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+
+        <TextBlock  
+            Grid.Column="0" Grid.Row="1" Margin="10,80,0,0" 
+            VerticalAlignment="Top" FontSize="14"
+            Text="Юридическое лицо" />
+        <TextBox 
+            Grid.Column="0" Grid.Row="1" Margin="10,102,10,10"  
+            TextWrapping="NoWrap" VerticalAlignment="Top"
+            Width="270" Text="{Binding ViewModel.LegalEntity, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+
+        <TextBlock  
+            Grid.Column="0" Grid.Row="1" Margin="10,150,0,0" 
+            VerticalAlignment="Top" FontSize="14"
+            Text="Название юр.лица" />
+        <TextBox 
+            Grid.Column="0" Grid.Row="1" Margin="10,172,10,10"  
+            TextWrapping="NoWrap" VerticalAlignment="Top"
+            Width="270" Text="{Binding ViewModel.LegalName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+
+        <TextBlock  
+            Grid.Column="1" Grid.Row="1" Margin="10,10,0,0" 
+            VerticalAlignment="Top" FontSize="14"
+            Text="Телефон отдела продаж" />
+        <TextBox 
+            Grid.Column="1" Grid.Row="1" Margin="10,32,10,10"  
+            TextWrapping="NoWrap" VerticalAlignment="Top"
+            Width="270" Text="{Binding ViewModel.PhoneNumberSalesDepartment, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+
+        <TextBlock  
+            Grid.Column="1" Grid.Row="1" Margin="10,80,0,0" 
+            VerticalAlignment="Top" FontSize="14"
+            Text="Телефон службы доставки" />
+        <TextBox 
+            Grid.Column="1" Grid.Row="1" Margin="10,102,10,10" TextWrapping="NoWrap" 
+            VerticalAlignment="Top" Width="270" 
+            Text="{Binding ViewModel.PhoneNumberDeliveryService, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+
+        <TextBlock  
+            Grid.Column="1" Grid.Row="1" Margin="10,150,0,0" 
+            VerticalAlignment="Top" FontSize="14"
+            Text="Представитель продавца" />
+        <TextBox 
+            Grid.Column="1" Grid.Row="1" Margin="10,172,10,10" Width="270" 
+            TextWrapping="NoWrap" VerticalAlignment="Top"
+            Text="{Binding ViewModel.SellersRepresentative, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+        
+
     </Grid>
 </ui:UiPage>

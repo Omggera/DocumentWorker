@@ -24,10 +24,13 @@ using System.Windows.Controls;
 using DocumentWorker.Services;
 using DocumentWorker.Views.Pages;
 using Wpf.Ui.Controls.Interfaces;
+using Wpf.Ui.Mvvm.Contracts;
+using System.Windows.Controls.Primitives;
+using Wpf.Ui.Common;
 
 namespace DocumentWorker.ViewModels
 {
-    public partial class DashboardViewModel : ObservableObject, INavigationAware
+    public partial class OrdersViewModel : ObservableObject, INavigationAware
     {
         [ObservableProperty]
         private ObservableCollection<string>? _fileslist = new();
@@ -44,7 +47,7 @@ namespace DocumentWorker.ViewModels
 
         //Список всех городов
         [ObservableProperty]
-        private List<string>? _cityList;
+        private ObservableCollection<string>? _cityList = new();
 
         [ObservableProperty]
         private string? _legalEntity;
@@ -71,15 +74,11 @@ namespace DocumentWorker.ViewModels
         private string _permissionToEdit = "True";
 
 
-        [ObservableProperty]
-        private string _someDialog;
-
-
         private readonly IGetCityListFromXml _getCityListFromXml;
         private readonly IGetXmlData _getXmlData;
         private ISaveSettingsXml _saveSettingsXml;
 
-        public DashboardViewModel(
+        public OrdersViewModel(
             IGetCityListFromXml getCityListFromXml, 
             IGetXmlData getXmlData,
             ISaveSettingsXml saveSettingsXml)
@@ -87,12 +86,14 @@ namespace DocumentWorker.ViewModels
             _getCityListFromXml = getCityListFromXml;
             _getXmlData = getXmlData;
 
-            CityList = _getCityListFromXml.GetCityList();
+            _getCityListFromXml.GetCityList(CityList);
             _saveSettingsXml = saveSettingsXml;
         }
 
         public void OnNavigatedTo()
         {
+            CityList.Clear();
+            _getCityListFromXml.GetCityList(CityList);
         }
 
         public void OnNavigatedFrom()
@@ -102,7 +103,7 @@ namespace DocumentWorker.ViewModels
         [RelayCommand]
         private async void Start()
         {
-            ExcelCreater excelCreater = new();
+            ExcelOrdersCreater excelOrdersCreater = new();
             if((SaveFolderPath != null) & (SaveFolderPath != string.Empty)) 
             {
                 SaveFolderPath = SaveFolderPath;
@@ -113,7 +114,7 @@ namespace DocumentWorker.ViewModels
                     LabelProgressBar = $"{value}%";
                 });
 
-                await Task.Run( () => excelCreater.Excel(
+                await Task.Run( () => excelOrdersCreater.CreateNewExcelDocument(
                     SaveFolderPath,
                     Fileslist,
                     CitySet,
@@ -131,7 +132,7 @@ namespace DocumentWorker.ViewModels
         [RelayCommand]
         private void OpenFile()
         {
-            SelectExcelFiles.AddExcelFilesToList(Fileslist);
+            SelectFolderOrFile.AddExcelOrdersFiles(Fileslist);
             ProgressBarValue = 0;
             LabelProgressBar = " ";
         }
@@ -153,13 +154,7 @@ namespace DocumentWorker.ViewModels
         [RelayCommand]
         private void SaveFolder()
         {
-            FolderBrowserDialog openFileDlg = new();
-            var result = openFileDlg.ShowDialog();
-            if (result.ToString() != string.Empty)
-            {
-
-                SaveFolderPath = openFileDlg.SelectedPath;
-            }
+            SaveFolderPath = SelectFolderOrFile.SelectFolderToSave();
         }
 
         [RelayCommand]
@@ -191,13 +186,5 @@ namespace DocumentWorker.ViewModels
 
             PermissionToEdit = "True";
         }
-
-        [RelayCommand]
-        private void AddNewCity()
-        {
-            
-            
-        }
-
     }
 }

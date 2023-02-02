@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -11,9 +12,9 @@ using System.Windows;
 
 namespace DocumentWorker.Models
 {
-    public class ExcelCreater
+    public class ExcelOrdersCreater
     {
-        public void Excel(
+        public void CreateNewExcelDocument(
             string savePath,
             ObservableCollection<string>? filesList,
             string cityName,
@@ -24,17 +25,17 @@ namespace DocumentWorker.Models
             string sellersRepresentative,
             IProgress<int> progress)
         {
-            var uri = new Uri("pack://application:,,,/TemplateXlsxFile/Base.xlsx");
+            var uri = new Uri("pack://application:,,,/TemplateExcelFile/Base.xlsx");
             var resourceStream = Application.GetResourceStream(uri).Stream;
 
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-            using (ExcelPackage excelPackage = new ExcelPackage(resourceStream))
+            for (int i = 0; i < filesList.Count; i++)
             {
-                //Первый файл "зашитый" в программу, как ресурс
-                ExcelWorksheet ws = excelPackage.Workbook.Worksheets["Sheet"];
-
-                for(int i = 0; i < filesList.Count; i++)
+                using (ExcelPackage excelPackage = new ExcelPackage(resourceStream))
                 {
+                    //Первый файл "зашитый" в программу, как ресурс
+                    ExcelWorksheet ws = excelPackage.Workbook.Worksheets["Sheet"];
+
                     byte[] bin = File.ReadAllBytes($"{filesList[i]}");
                     using (MemoryStream stream = new MemoryStream(bin))
                     using (ExcelPackage newExcelPackage = new ExcelPackage(stream))

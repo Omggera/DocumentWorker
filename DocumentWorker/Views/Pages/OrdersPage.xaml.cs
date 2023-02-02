@@ -8,14 +8,14 @@ namespace DocumentWorker.Views.Pages
     /// <summary>
     /// Interaction logic for DashboardPage.xaml
     /// </summary>
-    public partial class DashboardPage : INavigableView<ViewModels.DashboardViewModel>
+    public partial class OrdersPage : INavigableView<ViewModels.OrdersViewModel>
     {
-        public ViewModels.DashboardViewModel ViewModel
+        public ViewModels.OrdersViewModel ViewModel
         {
             get;
         }
 
-        public DashboardPage(ViewModels.DashboardViewModel viewModel)
+        public OrdersPage(ViewModels.OrdersViewModel viewModel)
         {
             ViewModel = viewModel;
 

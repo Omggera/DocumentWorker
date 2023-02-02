@@ -5,14 +5,14 @@ namespace DocumentWorker.Views.Pages
     /// <summary>
     /// Interaction logic for DataView.xaml
     /// </summary>
-    public partial class DataPage : INavigableView<ViewModels.DataViewModel>
+    public partial class PricePage : INavigableView<ViewModels.PriceViewModel>
     {
-        public ViewModels.DataViewModel ViewModel
+        public ViewModels.PriceViewModel ViewModel
         {
             get;
         }
 
-        public DataPage(ViewModels.DataViewModel viewModel)
+        public PricePage(ViewModels.PriceViewModel viewModel)
         {
             ViewModel = viewModel;
 

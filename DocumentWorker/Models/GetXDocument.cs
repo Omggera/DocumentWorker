@@ -16,7 +16,7 @@ namespace DocumentWorker.Models
         public XDocument GetDoc()
         {
             XDocument xdoc = new XDocument();
-            using (StreamReader stream = new StreamReader($"{AppDomain.CurrentDomain.BaseDirectory}SettingsXml\\Settings.xml"))
+            using (StreamReader stream = new StreamReader($"{AppDomain.CurrentDomain.BaseDirectory}Settings\\Settings.xml"))
             {
                 xdoc = XDocument.Load(stream);
             }
